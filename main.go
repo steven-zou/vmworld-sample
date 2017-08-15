@@ -27,14 +27,15 @@ type metadata struct {
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		//Only write once
+		//Use file as a flag to prove the volume is attached
+		writeFlagFile(volumePath)
+
 		info, err := getSystemInfo()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
-		//Only write once
-		writeFlagFile(volumePath)
 
 		w.WriteHeader(http.StatusOK)
 		w.Write(info)
@@ -111,7 +112,7 @@ func fileExisting(path string) bool {
 func listFilesInVolume(path string) ([]string, error) {
 	files := []string{}
 	if !fileExisting(path) {
-		return files, errors.New("Path " + path + " does not exist")
+		return files, errors.New("Path " + path + " is not attached")
 	}
 
 	osFiles, err := ioutil.ReadDir(path)
