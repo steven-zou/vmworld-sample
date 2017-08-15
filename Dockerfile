@@ -7,8 +7,6 @@ RUN mkdir /vmworld2017
 COPY ./vmworld-sample /vmworld2017/
 RUN chmod u+x /vmworld2017/vmworld-sample
 
-VOLUME ["/vmworld"]
-
 WORKDIR /vmworld2017/
 
 ENTRYPOINT ["/vmworld2017/vmworld-sample"]
