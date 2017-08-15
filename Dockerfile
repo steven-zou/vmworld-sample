@@ -5,8 +5,10 @@ MAINTAINER szou@vmware.com
 RUN mkdir /vmworld2017
 
 COPY ./vmworld-sample /vmworld2017/
-
 RUN chmod u+x /vmworld2017/vmworld-sample
+
+VOLUME ["/vmworld"]
+EXPOSE 62017
 
 WORKDIR /vmworld2017/
 
